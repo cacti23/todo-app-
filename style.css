@@ -58,13 +58,15 @@ body {
   transform: scale(0.98) rotate(45deg);
 }
 
-#current-date {
+#date {
   position: absolute;
   bottom: 10px;
   left: 10px;
   color: #fff;
   font-size: 25px;
   font-family: 'Titillium Web', sans-serif;
+  width: 150px;
+  height: 40px;
 }
 
 /* -----content----- */
@@ -107,6 +109,11 @@ body {
   top: 7px;
   left: 50px;
   background-color: #fff;
+}
+
+.item p.line-through {
+  text-decoration: line-through;
+  color: #ccc;
 }
 
 .item i.co:hover {
