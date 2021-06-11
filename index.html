@@ -17,14 +17,27 @@
       <div class="refresh-todo">
         <i class="fas fa-redo" aria-hidden="true"></i>
       </div>
-      <div class="current-date"></div>
+      <div class="current-date">
+
+      </div>
     </div>
     <div class="content">
-      <ul class="todo-list"></ul>
+      <ul id="todo-list">
+        <li class="item">
+          <i class="co far fa-check-circle" jobs="complete"></i>
+          <p class="text">Drink Coffee</p>
+          <i class="de far fa-trash-alt" jobs="delete"></i>
+        </li>
+        <li class="item">
+          <i class="co far fa-check-circle" jobs="complete"></i>
+          <p class="text line-through">Start making a todo app</p>
+          <i class="de far fa-trash-alt" jobs="delete"></i>
+        </li>
+      </ul>
     </div>
-    <div class="add-item">
+    <div class="add-to-do">
       <i class="fas fa-plus-circle" aria-hidden="true"></i>
-      <input type="text" placeholder="Add to do">
+      <input type="text" placeholder="Add to do" id="input">
     </div>
   </div>
 </body>

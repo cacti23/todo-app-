@@ -1,5 +1,158 @@
+@import url('https://fonts.googleapis.com/css2?family=Titillium+Web:wght@300&display=swap');
+
 * {
-  margin: 0;
   box-sizing: border-box;
-  background-color: aqua;
+}
+
+body {
+  background: linear-gradient(to right, #212529, #adb5bd);
+  font-family: 'Titillium Web', sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  overflow: hidden;
+  margin: 0;
+}
+
+.container {
+  padding: 10px;
+  width: 380px;
+  margin: 0 auto;
+}
+
+.header {
+  width: 360px;
+  height: 200px;
+  background-image: url('./images/bg-4.jpeg');
+  background-size: 100% 100%;
+  /* to set perfect in the container */
+  background-repeat: no-repeat;
+  border-radius: 15px 15px 0 0;
+  /* only top right and top let */
+  position: relative;
+  /* in order to make the children position inside the parent make
+  to include position relative on parent like and position absolute 
+  on children */
+}
+
+.refresh-todo {
+  width: 25px;
+  height: 25px;
+  /* first always set width and height of the container */
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+.refresh-todo i {
+  font-size: 25px;
+  /* my width and height is 25 x 25 hence i made the font size to be 25 px */
+  transition: 0.2s ease;
+  /* included the transition property to make the transform smooth */
+  color: #fff;
+}
+
+.refresh-todo i:hover {
+  cursor: pointer;
+  transform: scale(0.98) rotate(45deg);
+}
+
+#current-date {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  color: #fff;
+  font-size: 25px;
+  font-family: 'Titillium Web', sans-serif;
+}
+
+/* -----content----- */
+.content {
+  width: 360px;
+  height: 350px;
+  background-color: #fff;
+  overflow: auto;
+}
+
+.content ul {
+  padding: 0;
+  margin: 0;
+}
+
+.item {
+  width: 360px;
+  height: 45px;
+  min-height: 45px;
+  position: relative;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.item i.co {
+  position: absolute;
+  font-size: 25px;
+  top: 10px;
+  left: 15px;
+  color: #000;
+}
+
+.item p.text {
+  position: absolute;
+  font-size: 20px;
+  margin: 0;
+  padding: 0;
+  top: 7px;
+  left: 50px;
+  background-color: #fff;
+}
+
+.item i.co:hover {
+  transform: scale(0.98);
+  cursor: pointer;
+}
+
+.item i.de {
+  position: absolute;
+  font-size: 25px;
+  /* we control the size of the delete item by only using font-size no need to use width and height parameter
+  this is valid for font-awesome icons (temp info) */
+  top: 10px;
+  right: 15px;
+  color: #000;
+}
+
+.item i.de:hover {
+  transform: scale(1.02);
+  cursor: pointer;
+  color: grey;
+}
+
+/* -----add item----- */
+.add-to-do {
+  width: 360px;
+  height: 50px;
+  background-color: #fff;
+  padding: 10px;
+  position: relative;
+}
+
+.add-to-do i {
+  position: absolute;
+  font-size: 30px;
+  color: #4162f6;
+}
+
+.add-to-do input {
+  position: absolute;
+  left: 50px;
+  top: 10px;
+  height: 30px;
+  width: 300px;
+  border: none;
+  font-size: 20px;
+  padding: 5px;
+  background-color: transparent;
 }
