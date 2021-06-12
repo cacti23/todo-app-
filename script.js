@@ -1,58 +1,79 @@
-// adding date to the app
-const dateElement = document.getElementById('date');
+let id;
+let storedTaskList;
+const check = 'fa-check-circle';
+const uncheck = 'fa-circle';
+const done = 'line-through';
 const today = new Date();
 const options = {
   weekday: 'long',
   month: 'short',
   day: 'numeric',
 };
+const dateElement = document.getElementById('date');
+const todoList = document.getElementById('todo-list');
+const inputElement = document.getElementById('input');
+const plusButton = document.querySelector('.add-to-do i');
+const refreshButton = document.querySelector('.refresh-todo');
+
+checkData();
+
 dateElement.innerHTML = `${today.toLocaleDateString('en-US', options)}`;
 
-// creating list data base
-let id = 0;
-const storedTaskList = [
-  {
-    taskName: 'Drink Coffee',
-    taskId: id,
-    taskDone: false,
-    taskInTrash: false,
-  },
-];
+function checkData() {
+  let data = localStorage.getItem('TODO');
+  if (data) {
+    storedTaskList = JSON.parse(data);
+    loadTodo(storedTaskList);
+    id = storedTaskList.length;
+  } else {
+    storedTaskList = [];
+    id = 0;
+  }
+}
 
-// storing the list in the data base
-localStorage.setItem('storedTaskList', JSON.stringify(storedTaskList));
+function loadTodo(list) {
+  list.map(item => {
+    addToDo(item.taskName, item.taskId);
+  });
+}
 
-// adding to do to the list
-
-const todoList = document.getElementById('todo-list');
-const check = 'far fa-check-circle';
-const uncheck = 'fas fa-check-circle';
-const done = 'line-through';
-
-const addToDo = (todo, id) => {
+function addToDo(todo, id) {
   const text = `<li class="item">
-          <i class="co ${check}" job="complete" id="${id}"></i>
+          <i class="co far ${uncheck}" job="complete" id="${id}"></i>
           <p class="text">${todo}</p>
           <i class="de far fa-trash-alt" job="delete" id="${id}"></i>
         </li>`;
   position = 'beforeend';
 
   todoList.insertAdjacentHTML(position, text);
+  localStorage.setItem('TODO', JSON.stringify(storedTaskList));
+}
+
+const toggleCompleteTodo = element => {
+  element.classList.toggle(check);
+  element.classList.toggle(uncheck);
+  element.parentNode.querySelector('.text').classList.toggle(done);
+  storedTaskList[element.id].taskDone = true;
 };
 
-// adding functionality in the plus button to add the todo item in the list
-const inputElement = document.getElementById('input');
+const removeTodo = element => {
+  element.parentNode.parentNode.removeChild(element.parentNode);
+  storedTaskList = storedTaskList.filter(item => element.id == item.taskId);
+  console.log(storedTaskList);
+  localStorage.setItem('TODO', JSON.stringify(storedTaskList));
+};
 
-document.addEventListener('keyup', e => {
+// -----eventListeners-----
+
+inputElement.addEventListener('keyup', e => {
   if (e.keyCode == 13) {
     const todo = inputElement.value;
-    if (1) {
-      addToDo(todo, id, false);
+    if (todo) {
+      addToDo(todo, id);
       storedTaskList.push({
         taskName: todo,
         taskId: id,
         taskDone: false,
-        taskInTrash: false,
       });
     }
     inputElement.value = '';
@@ -60,21 +81,34 @@ document.addEventListener('keyup', e => {
   }
 });
 
-// complete todo
-const toggleCompleteTodo = element => {
-  element.classList.toggle(check);
-  element.classList.toggle(uncheck);
-
-  element.parentNode.querySelector('.text').classList.toggle(done);
-};
-
-// call complete todo
-window.addEventListener('click', e => {
-  let element = e.target;
-  const elementJob = element.attribute.job.value;
-  if (elementJob == 'complete') {
-    toggleCompleteTodo(element);
+todoList.addEventListener('click', e => {
+  const element = e.target;
+  const elementJob = element.attributes.job;
+  if (elementJob) {
+    if (elementJob.value == 'complete') {
+      toggleCompleteTodo(element);
+    }
+    if (elementJob.value == 'delete') {
+      removeTodo(element);
+    }
   }
 });
 
-// display stored todo
+refreshButton.addEventListener('click', e => {
+  localStorage.clear();
+  location.reload();
+});
+
+plusButton.addEventListener('click', e => {
+  const todo = inputElement.value;
+  if (todo) {
+    addToDo(todo, id);
+    storedTaskList.push({
+      taskName: todo,
+      taskId: id,
+      taskDone: false,
+    });
+    inputElement.value = '';
+    id++;
+  }
+});
