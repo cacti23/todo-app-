@@ -20,7 +20,7 @@ const storedTaskList = [
 ];
 
 // storing the list in the data base
-// localStorage.setItem('storedTaskList', JSON.stringify(storedTaskList));
+localStorage.setItem('storedTaskList', JSON.stringify(storedTaskList));
 
 // adding to do to the list
 
@@ -31,9 +31,9 @@ const done = 'line-through';
 
 const addToDo = (todo, id) => {
   const text = `<li class="item">
-          <i class="co ${check}" jobs="complete" id="${id}"></i>
+          <i class="co ${check}" job="complete" id="${id}"></i>
           <p class="text">${todo}</p>
-          <i class="de far fa-trash-alt" jobs="delete" id="${id}"></i>
+          <i class="de far fa-trash-alt" job="delete" id="${id}"></i>
         </li>`;
   position = 'beforeend';
 
@@ -70,11 +70,11 @@ const toggleCompleteTodo = element => {
 
 // call complete todo
 window.addEventListener('click', e => {
-  const element = e.target;
-  console.log(element);
-  console.log(element.attributes.job);
-  // const elementJob = element.attribute.job.value;
-  // if (elementJob == 'complete') {
-  //   toggleCompleteTodo();
-  // }
+  let element = e.target;
+  const elementJob = element.attribute.job.value;
+  if (elementJob == 'complete') {
+    toggleCompleteTodo(element);
+  }
 });
+
+// display stored todo
