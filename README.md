@@ -3,7 +3,7 @@
 ### [Live Site](https://peaceful-jackson-8644ff.netlify.app/)
 
 
-![Grocery Hub Homepage](https://ibb.co/qBMZkRX)
+![Todo App](https://user-images.githubusercontent.com/76640086/121781035-a0640180-cbc0-11eb-8248-b19ff975246a.png)
 
 
 ## Introduction
